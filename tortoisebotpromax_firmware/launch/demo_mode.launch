@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+
+<launch>
+
+    <include file="$(find tortoisebotpromax_firmware)/launch/bringup.launch" />   
+    <include file="$(find tortoisebotpromax_odometry)/launch/carto_odometry.launch" />
+    <include file="$(find tortoisebotpromax_navigation)/launch/carto_navigation.launch" /> 
+  
+</launch>

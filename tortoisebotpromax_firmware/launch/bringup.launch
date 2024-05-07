@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <arg name="joy" default="true" />
+    <arg name="stamped_imu" default="false" />
+    <arg name="realsense" default="true" />
+    <arg name="yd_cam" default="false" />
+    <arg name="merge_scan" default="true" />
+
+    <param command="$(find xacro)/xacro $(find tortoisebotpromax_description)/urdf/tortoisebotpromax.xacro"
+        name="robot_description" />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+    <group if="$(arg joy)">
+        <include file="$(find tortoisebotpromax_firmware)/launch/auto_joy.launch" />
+    </group>
+
+    <node name="serial_node" pkg="rosserial_python" type="serial_node.py" output="screen">
+        <param name="port" type="string" value="/dev/esp" />
+        <param name="baud" type="int" value="921600" />
+    </node>
+    
+
+    <group if="$(arg stamped_imu)">
+        <node name="stamped_imu" pkg="tortoisebotpromax_firmware" type="imu_stamped.py" output="screen" />
+    </group>
+
+    <group if="$(arg merge_scan)">
+        <include file="$(find tortoisebotpromax_firmware)/launch/ydlidar_s2.launch">
+            <arg name="scan_topic" value="lidar/scan" />
+        </include>
+        <include file="$(find tortoisebotpromax_firmware)/launch/scan_merger.launch" />
+    </group>
+
+    <group unless="$(arg merge_scan)">
+        <include file="$(find tortoisebotpromax_firmware)/launch/ydlidar_s2.launch" />
+    </group>
+
+
+    <group if="$(arg realsense)">
+        <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+            <arg name="filters" value="pointcloud" />
+        </include>
+    </group>
+
+    <group if="$(arg yd_cam)">
+        <include file="$(find bimu_rgbd_camera)/launch/bimu_camera.launch" />
+    </group>
+
+    <node name="network_data" pkg="tortoisebotpromax_firmware" type="network_pub" />
+    
+  
+</launch>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- joy node -->
+    <node respawn="true" pkg="joy" type="joy_node" name="tortoisebotpromax_joy_node">
+    <param name="dev_ff" type="string" value="/dev/input/haptics" />
+    <param name="dev" type="string" value="/dev/input/joy" />
+  </node> 
+
+  <!-- Axes -->
+  <param name="axis_linear" value="1" type="int" />
+  <param name="axis_angular" value="0" type="int" />
+  <param name="scale_linear" value="0.5" type="double" />
+  <param name="scale_angular" value="1.2" type="double" />
+  <node pkg="auto_joy_teleop" type="auto_joy_teleop" name="auto_joy_teleop" />
+
+
+</launch>
+   
