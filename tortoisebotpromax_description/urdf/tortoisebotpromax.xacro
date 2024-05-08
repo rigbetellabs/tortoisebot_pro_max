@@ -6,9 +6,9 @@
 <xacro:include filename="$(find tortoisebotpromax_description)/urdf/tortoisebotpromax.gazebo" />
 <link name="base_link">
   <inertial>
-    <origin xyz="0.0033086349728696325 -0.00025576595630225947 0.08173845599083349" rpy="0 0 0"/>
+    <origin xyz="0.0033086349728696325 -0.00025576595630225947 0.08172898308487506" rpy="0 0 0"/>
     <mass value="20.416425166212473"/>
-    <inertia ixx="0.276433" iyy="0.30753" izz="0.275594" ixy="-0.000608" iyz="-0.000208" ixz="0.007362"/>
+    <inertia ixx="0.276447" iyy="0.307544" izz="0.275594" ixy="-0.000608" iyz="-0.000208" ixz="0.007361"/>
   </inertial>
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -153,19 +153,19 @@
 
 <link name="right_wheel_1">
   <inertial>
-    <origin xyz="-8.637543061420799e-10 -0.008266917119390038 9.718603005692827e-11" rpy="0 0 0"/>
+    <origin xyz="-8.637543231715899e-10 -0.008266917119389677 9.71860647513978e-11" rpy="0 0 0"/>
     <mass value="0.7443184672589979"/>
     <inertia ixx="0.000449" iyy="0.000766" izz="0.000449" ixy="-0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
-    <origin xyz="0.0 0.119671 -0.039263" rpy="0 0 0"/>
+    <origin xyz="0.0 0.119671 -0.039" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://tortoisebotpromax_description/meshes/right_wheel_1.dae" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="0.0 0.119671 -0.039263" rpy="0 0 0"/>
+    <origin xyz="0.0 0.119671 -0.039" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://tortoisebotpromax_description/meshes/right_wheel_1.dae" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -174,19 +174,19 @@
 
 <link name="left_wheel_1">
   <inertial>
-    <origin xyz="4.1007612481098555e-08 0.008267236978834941 5.3271622113548744e-09" rpy="0 0 0"/>
+    <origin xyz="4.028968666898794e-09 0.008267236978835635 5.327161531343272e-09" rpy="0 0 0"/>
     <mass value="0.7443190344381032"/>
     <inertia ixx="0.000449" iyy="0.000766" izz="0.000449" ixy="0.0" iyz="0.0" ixz="-0.0"/>
   </inertial>
   <visual>
-    <origin xyz="0.0 -0.119671 -0.039263" rpy="0 0 0"/>
+    <origin xyz="0.0 -0.119671 -0.039" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://tortoisebotpromax_description/meshes/left_wheel_1.dae" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="0.0 -0.119671 -0.039263" rpy="0 0 0"/>
+    <origin xyz="0.0 -0.119671 -0.039" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://tortoisebotpromax_description/meshes/left_wheel_1.dae" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -237,14 +237,14 @@
 </joint>
 
 <joint name="right_wheel_joint" type="continuous">
-  <origin xyz="0.0 -0.119671 0.039263" rpy="0 0 0"/>
+  <origin xyz="0.0 -0.119671 0.039" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="right_wheel_1"/>
   <axis xyz="-0.0 1.0 -0.0"/>
 </joint>
 
 <joint name="left_wheel_joint" type="continuous">
-  <origin xyz="0.0 0.119671 0.039263" rpy="0 0 0"/>
+  <origin xyz="0.0 0.119671 0.039" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="left_wheel_1"/>
   <axis xyz="-0.0 1.0 0.0"/>
