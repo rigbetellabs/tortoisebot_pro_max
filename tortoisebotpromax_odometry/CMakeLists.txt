@@ -13,14 +13,11 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
-install(FILES config/ekf.yaml config/icp.yaml config/lidar.lua
+install(FILES config/lidar.lua
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
 )
-install(FILES launch/carto_odometry.launch launch/icp_fuse.launch
+install(FILES launch/carto_odometry.launch 
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
 
-catkin_install_python(PROGRAMS scripts/alpha_beta_filter.py
-                      DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
 
