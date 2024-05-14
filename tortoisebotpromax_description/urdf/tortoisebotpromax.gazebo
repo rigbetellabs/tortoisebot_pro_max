@@ -37,14 +37,14 @@
 </gazebo>
 
 <gazebo reference="front_castor_1">
-  <mu1>0.10</mu1>
-  <mu2>0.10</mu2>
+  <mu1>0.00</mu1>
+  <mu2>0.00</mu2>
   <selfCollide>true</selfCollide>
 </gazebo>
 
 <gazebo reference="back_castor_1">
-  <mu1>0.10</mu1>
-  <mu2>0.10</mu2>
+  <mu1>0.00</mu1>
+  <mu2>0.00</mu2>
   <selfCollide>true</selfCollide>
 </gazebo>
 
@@ -70,7 +70,7 @@
       <wheelSeparation>0.252</wheelSeparation>
       <wheelDiameter>0.08</wheelDiameter>
       <wheelAcceleration>1.0</wheelAcceleration>
-      <wheelTorque>50</wheelTorque>
+      <wheelTorque>100</wheelTorque>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
