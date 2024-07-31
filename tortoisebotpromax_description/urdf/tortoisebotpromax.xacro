@@ -1,9 +1,10 @@
 <?xml version="1.0" ?>
 <robot name="tortoisebotpromax" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <xacro:include filename="$(find tortoisebotpromax_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find tortoisebotpromax_description)/urdf/tortoisebotpromax.trans" />
+  <xacro:include filename="$(find tortoisebotpromax_description)/urdf/tortoisebotpromax.gazebo" />
 
-<xacro:include filename="$(find tortoisebotpromax_description)/urdf/materials.xacro" />
-<xacro:include filename="$(find tortoisebotpromax_description)/urdf/tortoisebotpromax.trans" />
-<xacro:include filename="$(find tortoisebotpromax_description)/urdf/tortoisebotpromax.gazebo" />
 <link name="base_link">
   <inertial>
     <origin xyz="0.0033086349728696325 -0.00025576595630225947 0.08172898308487506" rpy="0 0 0"/>

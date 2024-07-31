@@ -1,0 +1,67 @@
+#!/usr/bin/python3
+
+
+import subprocess
+import re
+import json
+
+
+def get_adapter_names():
+    logical_output = subprocess.check_output(["sudo","lshw","-C","network"],stderr=subprocess.DEVNULL, universal_newlines=True)
+    logical_names = re.findall(r'logical name: (\w+)', logical_output)
+    return logical_names
+
+def get_bus_names():
+    bus_output = subprocess.check_output(["sudo","lshw","-C","network"], stderr=subprocess.DEVNULL,universal_newlines=True)
+    bus_names = re.findall(r'bus info: (\S+)', bus_output)
+    return bus_names
+
+def give_dict(list1, list2):
+    mapping = {}
+    for i in range(0,len(list1)):
+        mapping[list1[i]] = list2[i]
+        
+    return mapping
+
+def hotspot_dev() -> str:
+    devices = give_dict(get_adapter_names(), get_bus_names())
+
+    for item in devices:
+        if item.startswith('w') and "pci" in devices[item]:
+            return item
+        else:
+            pass
+    return None
+
+def wifi_dev() -> str:
+    devices = give_dict(get_adapter_names(), get_bus_names())
+
+    for item in devices:
+        if item.startswith('w') and "usb" in devices[item]:
+            return item
+        else:
+            pass
+    return None
+
+
+#config = get_config()
+ip_command_data = subprocess.check_output(["ip","-j","address"],stderr=subprocess.DEVNULL, universal_newlines=True,text=True)
+data = json.loads(ip_command_data)
+
+# Create dictionary with ifname as key and broadcast local ip address as value
+try:
+    result = {interface["ifname"]: next((addr["local"] for addr in interface["addr_info"] if addr["family"] == "inet"), None) for interface in data}
+except Exception as e:
+    print(None)
+#    print("ERROR-JSON_RBN")
+    #sys.exit(1)
+
+wifi_device = wifi_dev()
+hotspot_device = hotspot_dev()
+
+if wifi_device != None and result[wifi_device] != None:
+    print(result[wifi_device])
+elif hotspot_device != None:
+    print(result[hotspot_device])
+else:
+    print("ERROR-ROBONET")
