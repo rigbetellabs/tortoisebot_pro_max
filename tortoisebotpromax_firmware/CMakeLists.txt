@@ -30,27 +30,27 @@ endif()
 ament_python_install_package(${PROJECT_NAME})
 
 # Install Python executables
+# install(PROGRAMS
+#   scripts/rbl_logger.py scripts/robot_diagnostics.py
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 install(PROGRAMS
-  scripts/rbl_logger.py scripts/robot_diagnostics.py
+  compiled_scripts/rbl_logger.pyc compiled_scripts/robot_diagnostics.pyc
   DESTINATION lib/${PROJECT_NAME}
 )
-add_executable(goal_status_publisher src/goal_status_publisher.cpp)
-add_executable(network_status_publisher src/network_status_publisher.cpp)
-# Add dependencies to the executable
-ament_target_dependencies(goal_status_publisher rclcpp std_msgs action_msgs)
-ament_target_dependencies(network_status_publisher rclcpp std_msgs action_msgs)
+install(PROGRAMS
+  bin/goal_status_publisher
+  bin/network_status_publisher
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 install(
-  DIRECTORY launch scripts config src
+  DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}
 )
-install(TARGETS
-goal_status_publisher
-network_status_publisher
-  DESTINATION lib/${PROJECT_NAME})
-#Required for dependencies and other folder
 # install(
-#   DIRECTORY 
-#   scripts
-#   DESTINATION share/${PROJECT_NAME}
+#   DIRECTORY bin/
+#   DESTINATION lib/${PROJECT_NAME}
 # )
+
 ament_package()
