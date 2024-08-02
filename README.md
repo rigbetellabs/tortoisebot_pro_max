@@ -119,7 +119,7 @@ git clone -b ros2 https://github.com/aws-robotics/aws-robomaker-small-house-worl
 ```
 Now direct your GAzebo Model Path to the following directory:
 ```
-echo 'export GAZEBO_MODEL_PATH=~/aws-robomaker-small-house-world/models:$GAZEBO_MODEL_PATH' >> ~/.bashrc4
+echo 'export GAZEBO_MODEL_PATH=~/aws-robomaker-small-house-world/models:$GAZEBO_MODEL_PATH' >> ~/.bashrc
 
 source ~/.bashrc
 ```
