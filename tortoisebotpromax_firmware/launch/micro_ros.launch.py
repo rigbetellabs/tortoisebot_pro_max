@@ -14,7 +14,7 @@ def generate_launch_description():
         
         Node(
         package='tortoisebotpromax_firmware',
-        executable='rbl_logger.py',
+        executable='rbl_logger.pyc',
         name='RBL_LOGGER',
         )
 

@@ -60,7 +60,7 @@ Holds the robot description including URDF, STL, config files for RVIZ, and Gaze
 
 | File               | Description                                 | Nodes Launched                    |
 |--------------------|---------------------------------------------|-----------------------------------|
-| [display.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_description/launch/display.launch)         | Launches Gazebo simulation with all necessary plugins and state publishers, along with RViz.                                                                                                                                     | robot_state_publisher, joint_state_publisher, rviz2, gazebo_ros                     |
+| [display.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_description/launch/display.launch.py)         | Launches Gazebo simulation with all necessary plugins and state publishers, along with RViz.                                                                                                                                     | robot_state_publisher, joint_state_publisher, rviz2, gazebo_ros                     |
 |[rviz.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_description/launch/rviz.launch.py)           | Launches RViz2 with necessary configuration.                                                                                                                                                                                      | rviz2 with configured settings                                                         |
 | [state_publisher.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_description/launch/state_publisher.launch.py) | Launches state publishers for the robot, including robot_state_publisher and joint_state_publisher nodes.                                                                                                                                                                                         | robot_state_publisher, joint_state_publisher                                            |
 
@@ -74,39 +74,35 @@ Provides sensor and actuation topics.
 | [auto_joy_teleop.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/auto_joy_teleop.launch.py) | Launches the joy node and auto joy node for complete joystick and waypoint-based control of the robot using a joystick.                                                                                  | joy_node, auto_joy_teleop                   |
 | [hubble_scripts.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/hubble_scripts.launch.py)  | Provides feedback to the controller about network data and navigation data, including network_pub node and goal_status_publisher node.                                                              | network_publisher (freezed binaries), goal_status_publisher (freezed binaries) | |
 | [realsense_d435i.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/realsense_d435i.launch.py)   | Launches ROS 2 Realsense packages with point cloud enabling.|ROS 2 Realsense packages
-| [micro_ros.launch.py](hhttps://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/micro_ros.launch.py)   | Launches MicroROS                                                                                                                                      | Micro ROS                 |
+| [micro_ros.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/micro_ros.launch.py)   | Launches MicroROS                                                                                                                                      | Micro ROS                 |
 ### 1.3 tortoisebotpromax_gazebo
 Simulation environment for tortoisebotpromax in Gazebo.
 
 | File                | Description                                             | Nodes Launched                |
 |---------------------|---------------------------------------------------------|-------------------------------|
-|  [gazebo.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/gazebo.launch.py)      | Launches a Gazebo environment with a specified world, along with the gazebo_ros node.                                    | gazebo_ros node                                         |
-|  [spawn_robot.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/spawn_robot.launch.py) | Launches a Gazebo environment with a specified world and spawns the robot with necessary plugins using gazebo_ros node. | gazebo_ros node, robot_state_publisher, joint_state_publisher, gazebo_controllers |
+|  [gazebo.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_gazebo/launch/gazebo.launch.py)      | Launches a Gazebo environment with a specified world, along with the gazebo_ros node.                                    | gazebo_ros node                                         |
+|  [spawn_robot.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_gazebo/launch/gazebo.launch.py) | Launches a Gazebo environment with a specified world and spawns the robot with necessary plugins using gazebo_ros node. | gazebo_ros node, robot_state_publisher, joint_state_publisher, gazebo_controllers |
 
 ### 1.4 tortoisebotpromax_navigation
 Autonomous navigation of the robot using `move_base` in a known as well as an unknown environment.
 
 | File                         | Description                              | Nodes Launched                              |
 |------------------------------|------------------------------------------|------------------------------------------------------|
-| [navigation.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/navigation.launch.py)| Launches all the necessary nodes for Nav2-based robot navigation with the necessary parameters for the specified robot.                                 | Nav2 navigation nodes (e.g., planner, controller, recovery nodes) with specified parameters. |
-| [map_saver.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/map_saver.launch.py) | Saves the map created during exploration mode to the maps directory.                                                                                        | map_saver node |
+| [navigation.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_navigation/launch/navigation.launch.py)| Launches all the necessary nodes for Nav2-based robot navigation with the necessary parameters for the specified robot.                                 | Nav2 navigation nodes (e.g., planner, controller, recovery nodes) with specified parameters. |
+| [map_saver.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_navigation/launch/map_saver.launch.py) | Saves the map created during exploration mode to the maps directory.                                                                                        | map_saver node |
 
 ### 1.5 tortoisebotpromax_bringup
 | File       | Description                                                                                                                   |
 |------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [autobringup.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/autobringup.launch.py)   | Launches the whole autonomous suite, including navigation, exploration, localization, LiDAR packages, RealSense packages, MicroROS(launched separately), simulation, state publisher, RViz, and Hubble scripts.                                 |
-| [bringup.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/bringup.launch.py)       | Brings up all the sensors and hardware components on the robot, MicroROS(launched separately), LiDAR, RealSense, and Hubble scripts.                                                                                                    |
+| [autobringup.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_bringup/launch/autobringup.launch.py)   | Launches the whole autonomous suite, including navigation, exploration, localization, LiDAR packages, RealSense packages, MicroROS(launched separately), simulation, state publisher, RViz, and Hubble scripts.                                 |
+| [bringup.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_bringup/launch/bringup.launch.py)       | Brings up all the sensors and hardware components on the robot, MicroROS(launched separately), LiDAR, RealSense, and Hubble scripts.                                                                                                    |
 ### 1.6 tortoisebotpromax_slam
 Simultaneous Localization and Mapping (SLAM) for the robot.
 
 | File                    | Description                                             | Additional Information                          |
 |-------------------------|---------------------------------------------------------|--------------------------------------------------|
-| [cartographer.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/cartographer.launch.py)  | Launches the Cartographer node for SLAM and localization tasks.                                                                         | Cartographer node                        |
-| [slam_toolbox.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_firmware/launch/slam_toolbox.launch.py)  | Launches the SLAM Toolbox for performing SLAM in unknown environments.                                                                  | SLAM Toolbox node                       |
-
-
-
-
+| [cartographer.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_slam/launch/cartographer.launch.py)  | Launches the Cartographer node for SLAM and localization tasks.                                                                         | Cartographer node                        |
+| [slam_toolbox.launch.py](https://github.com/rigbetellabs/tortoisebot_pro_max/blob/ros2-galactic/tortoisebotpromax_slam/launch/slam_toolbox.launch.py)  | Launches the SLAM Toolbox for performing SLAM in unknown environments.                                                                  | SLAM Toolbox node                       |
 
 
 ## 2. Simulation
@@ -117,7 +113,7 @@ Lets first source the models necessary for visualzing the simulation world
 cd ~ 
 git clone -b ros2 https://github.com/aws-robotics/aws-robomaker-small-house-world.git
 ```
-Now direct your GAzebo Model Path to the following directory:
+Now direct your Gazebo Model Path to the following directory:
 ```
 echo 'export GAZEBO_MODEL_PATH=~/aws-robomaker-small-house-world/models:$GAZEBO_MODEL_PATH' >> ~/.bashrc
 
@@ -232,7 +228,7 @@ sudo nmcli device wifi connect "your-wifi-name" password "your-wifi-password"
 > [!IMPORTANT]
 > Make sure if you dissasemble the robot, reconnect the USB ports as per the following diagram:
 
-![USB Port Connections](img/port_connections.png)
+![USB Port Connections](img/connection.png)
 
 
 ## 4. Launch Sequence
@@ -255,7 +251,7 @@ cd ros2_ws/src/tortoisebot_pro_max
 For complete startup of the robot with all its features and autonomous navigation:
 
 ```bash
-ros2 launch tortoisebotpromax_bringup autobringup.launch.py joy:=true # Set true to get joystick control
+ros2 launch tortoisebotpromax_bringup autobringup.launch.py 
 ```
 Other Arguments to play with:
 | Argument      | Description                                                                                                                                                   | Default Value |
@@ -269,7 +265,7 @@ ___________
 
 To launch only sensors and actuators without navigation and odometry:
 ```bash
-ros2 launch tortoisebotpromax_bringup bringup.launch.py joy:=True #set to true for joystick control
+ros2 launch tortoisebotpromax_bringup bringup.launch.py
 ```
 
 ### 4.1 Map Generation
@@ -342,7 +338,7 @@ This topic provides an array of ticks for all four wheels of the robot, in the f
 The `/wheel/vel` topic sends an array of calculated velocities for each wheel on the robot, received via encoders. The format of the array is `[left wheel right wheel]`, representing the actual velocity at which each wheel is moving.
 
 #### `/hill_hold_control`
-The `/hill_hold_control` topic when enabled holds the robot on slope without any user input.
+The `/hill_hold_control` topic when enabled (It can be enabled by publishing true on `/hill_hold_control` topic) holds the robot on slope without any user input.
 
 ![hill_hold](img/hill_hold.gif) 
 
@@ -375,7 +371,6 @@ Here is a table summarizing the instructions for each diagnostic test:
 
 | Test Number | Test Type                    |
 |-------------|------------------------------|
-| 0           | Full Diagnostic Test         |
 | 1           | Motor and Encoder Test       |
 | 2           | Motor Direction Test         |
 | 3           | IMU Connections Test         |
@@ -383,19 +378,17 @@ Here is a table summarizing the instructions for each diagnostic test:
 
 ### Detailed Instructions
 
-1. **Full Diagnostic Test (Test Number: 0):**
-   - Run the full diagnostic test to check the overall health of the robot.
 
-2. **Motor and Encoder Test (Test Number: 1):**
+1. **Motor and Encoder Test (Test Number: 1):**
    - Check motor and encoder connections.
 
-3. **Motor Direction Test (Test Number: 2):**
+2. **Motor Direction Test (Test Number: 2):**
    - Verify motor direction.
 
-4. **IMU Connections Test (Test Number: 3):**
+3. **IMU Connections Test (Test Number: 3):**
    - Validate IMU (Inertial Measurement Unit) connections.
 
-5. **Display Connections Test (Test Number: 4):**
+4. **Display Connections Test (Test Number: 4):**
    - Confirm proper connections with the display.
 
 ### How to Run Diagnostics
@@ -404,15 +397,19 @@ To run the diagnostic tests, follow these steps:
 
 1. On your tortoisebotpromax terminal, launch the `bringup.launch` file:
    ```bash
-   roslaunch tortoisebotpromax_firmware bringup.launch
+   ros2 launch tortoisebotpromax_bringup bringup.launch
    ```
 
-2. On your slave PC or another terminal of your tortoisebotpromax, run the diagnostics test script:
+2. Open second terminal on your tortoisebotpromax terminal, run the diagnostics test script:
    ```bash
-   python3 diagnostics_test.py
+   ros2 run tortoisebotpromax_firmware robot_diagnostics.pyc
    ```
 
-3. The script will guide you through the instructions for each diagnostic test. Follow the on-screen instructions carefully.
+3. The script will guide you through the instructions for each diagnostic test. Follow the on-screen instructions carefully.For us to see the result of diagnostics,open third terminal in tortoisebotpromax terminal  and run:
+   ```bash
+   ros2 run tortoisebotpromax_firmware rbl_logger.pyc
+   ```
+
 
 ### Important Notes
 - It is crucial to execute the tests with caution and follow the on-screen instructions for each test to ensure accurate results.
