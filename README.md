@@ -46,10 +46,11 @@ For inquiries and collaboration opportunities, reach out to RigBetel Labs.
 - [**4. Launch Sequence**](#4-launch-sequence)
    - [**4.1 Map Generation**](#41-map-generation)
    - [**4.2 Autonomous Navigation**](#42-autonomous-navigation-in-the-saved-map)
-- [**5. Important Low level Topics**](#5-low-level-ros-topics)
-- [**6. tortoisebotpromax Robot Parameters**](#6-tortoisebotpromax-robot-parameters)
+   - [**4.3 Visualizing in remote PC**](#43-visualizing-in-remote-pc)
+- [**5. Features via ROS Topics**](#5-features-via-ros-topics)
+- [**6. Tortoisebot Pro Max Robot Parameters**](#6-tortoisebotpromax-robot-parameters)
 - [**7. Diagnostic Tests**](#7-diagnostic-tests)
-- [**8. Joystick Control Instructions**](#8-joystick-control-instructions)
+- [**8. USB Port Configuration**](#8-usb-ports-configuration)
 
 
 ## 1. Package Description
@@ -152,6 +153,8 @@ To Launch simulation:
 ```bash
 ros2 launch tortoisebotpromax_bringup autobringup.launch.py use_sim_time:=True
 ```
+>[!NOTE] bringup.launch.py can not be launched in simulation as it is robot specific launch file to bringup all the sensors and hardware components on the robot.
+
 The gazebo world looks like this:
 
 ![playground](img/playground2.jpeg)
@@ -160,10 +163,20 @@ The gazebo world looks like this:
 
 ## 3. Real Robot
 
-### Initial Wifi Setup
+### Modes of robot.
+There are two modes of robot 
+#### 1. Demo Mode - ROS is running on the robot.
+#### 2. Development Mode - No ROS node is running on the robot.
 
-> [!NOTE]
-> By default, the robot is programmed to be started up automatically upon bootup, with its ros running locally without the need for any wifi network.
+>By default, When robot is switched on for first time once it is delivered to you, the robot is programmed to be started up automatically in demo mode ,with its ros running without the need for any wifi network.
+
+>During demo mode, robot can do autonomous navigation using joystick.  Refer below image to understand the working of joystick.
+
+![autojoy](img/autojoyteleop.png)
+
+>As robot is currently  not connected with any WiFi, We can not perform SSH, visualize it in rviz or  switch it to development mode. For us to do all that we need to follow the process of initial WiFi setup.
+
+### Initial Wifi Setup
 
 Follow the steps below to connect the robot to your desired Wifi network
 #### 1. Create a mobile hotspot
@@ -191,11 +204,16 @@ Power on the robot and wait until it connects to your hotspot network
 
 - Open a new terminal, and enter the SSH credentials
 ```bash
+# Method 1-ssh using user name 
+ssh ttb-promax@192.168.51.102  
+pwd: "rbl@2020"
+
+#Method 2 -ssh using ip address 
 ssh ttb-promax@rigbetellabs.local  
 pwd: "rbl@2020"
 ```
 > [!TIP]
-> The robot name and password have been provided to you while deployment, they have also been marked on the PC present inside the robot. IP can be seen on the display of robot once connected
+> IP can be seen on the display of robot once connected with WiFi
 
 
 | Method1           | Method2                            | 
@@ -224,22 +242,20 @@ sudo nmcli device wifi connect "your-wifi-name" password "your-wifi-password"
 
 ![Step1](img/wifissh.jpeg) 
 
-### USB ports Configuration
-> [!IMPORTANT]
-> Make sure if you dissasemble the robot, reconnect the USB ports as per the following diagram:
 
-![USB Port Connections](img/connection.png)
 
 
 ## 4. Launch Sequence
+### Switching mode in robot
 > [!NOTE]
-> By default, the robot is programmed to be started up automatically upon bootup, with its ros running locally without the need for any wifi network. To get into the development mode of the robot, ssh into the robot and run
+> By default, the robot is programmed to be started up automatically in demo mode, with its ros running on robot without the need for any wifi network. To get into the development mode of the robot, ssh into the robot and run
 
 ```bash
 cd ros2_ws/src/tortoisebot_pro_max
 ./development.sh
 ```
-This will stop all your local ros servers permanently and allow you to test your launch files according to will. If you need the robot to be upstart upon bootup again, you can always enable it using
+> [!NOTE]
+This will stop all the running ros processes permanently on the robot  and allowing you to test your launch files accordingly. If you need the robot to  upstart i.e. (Starting desired ROS processes automatically on boot) use the below command to start demo mode 
 ```bash
 cd ros2_ws/src/tortoisebot_pro_max
 ./demo.sh
@@ -247,7 +263,8 @@ cd ros2_ws/src/tortoisebot_pro_max
 
 
 ### Real Robot
-#### (Make sure you are in development mode before manually launching the following scripts)
+> [!NOTE]
+>Make sure you are in development mode before manually launching the following scripts)
 For complete startup of the robot with all its features and autonomous navigation:
 
 ```bash
@@ -288,16 +305,14 @@ Using Cartographer:
 ros2 launch tortoisebotpromax_bringup autobringup.launch exploration:=False map_file:=/your/map/directory
 ```
 
-> [!NOTE]
-> Upon powering on the robot you'll be able to see the bootup animation on the robot
+### 4.3 Visualizing in remote PC
+ROS domain id for robot is set to 169. So to visualize robot ros topics in remote PC we need to enter below command in terminal of remote pc everytime we open a new terminal.
 
-![bootup](img/booting.gif) 
-<!-- ![bootup2](img/bootup1.gif) -->
+```bash
+export ROS_DOMAIN_ID=169
+```
 
-> [!NOTE]
-> Once the robot is booted up and bringup.launch is initiated, you'll see the Lidar rotating at a higher rate.
-
-## 5. Low-Level ROS Topics
+## 5. Features via ROS Topics
 
 #### `/battery/percentage`
 This topic provides information about the remaining battery percentage of the robot. 
@@ -342,7 +357,7 @@ The `/hill_hold_control` topic when enabled (It can be enabled by publishing tru
 
 ![hill_hold](img/hill_hold.gif) 
 
-## 6. tortoisebotpromax Robot Parameters
+## 6. Tortoisebot ProMax Robot Parameters
 
 | Parameter                   | Value                                     |
 |-----------------------------|-------------------------------------------|
@@ -407,7 +422,7 @@ To run the diagnostic tests, follow these steps:
 
 3. The script will guide you through the instructions for each diagnostic test. Follow the on-screen instructions carefully.For us to see the result of diagnostics,open third terminal in tortoisebotpromax terminal  and run:
    ```bash
-   ros2 run tortoisebotpromax_firmware rbl_logger.pyc
+   ros2 topic echo /rbl_logger
    ```
 
 
@@ -418,8 +433,10 @@ To run the diagnostic tests, follow these steps:
 
 By following these instructions, you can perform diagnostic tests on the tortoisebotpromax robot to identify and resolve any issues with its components.
 
-## 8. Joystick Control Instructions
-![autojoy](img/autojoyteleop.png)
+## 8. USB Ports Configuration
+> [!IMPORTANT]
+> Make sure if you dissasemble the robot, reconnect the USB ports as per the following diagram:
 
+![USB Port Connections](img/connection.png)
 
 
