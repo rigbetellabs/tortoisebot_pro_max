@@ -103,7 +103,36 @@ Visualization Manager:
       Show Names: false
       Tree:
         map:
-          {}
+          odom:
+            base_link:
+              back_castor_1:
+                {}
+              camera_link:
+                camera_accel_frame:
+                  camera_accel_optical_frame:
+                    {}
+                camera_color_frame:
+                  camera_color_optical_frame:
+                    {}
+                camera_depth_frame:
+                  camera_depth_optical_frame:
+                    {}
+                camera_depth_link:
+                  {}
+                camera_gyro_frame:
+                  camera_gyro_optical_frame:
+                    {}
+              front_castor_1:
+                {}
+              imu_link:
+                {}
+              left_wheel_1:
+                {}
+              lidar_base_1:
+                lidar_1:
+                  {}
+              right_wheel_1:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -260,6 +289,7 @@ Visualization Manager:
               Path: true
               Value: true
             Map: false
+            Pose: true
             RobotModel: false
             Sensors:
               LaserScan: true
@@ -388,6 +418,26 @@ Visualization Manager:
           Value: true
       Enabled: true
       Name: Local Costmap
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz_default_plugins/Pose
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.30000001192092896
+      Head Radius: 0.10000000149011612
+      Name: Pose
+      Shaft Length: 1
+      Shaft Radius: 0.05000000074505806
+      Shape: Arrow
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /goal_pose
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 36; 31; 49
@@ -434,7 +484,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 6.101155757904053
+      Distance: 5.147093772888184
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
