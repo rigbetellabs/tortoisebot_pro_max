@@ -7,6 +7,8 @@ Panels:
         - /Global Options1
         - /Status1
         - /Sensors1
+        - /Sensors1/LaserScan1
+        - /Sensors1/LaserScan1/Topic1
         - /Global Costmap1/Polygon1
       Splitter Ratio: 0.5
     Tree Height: 400
@@ -27,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan
 Visualization Manager:
   Class: ""
   Displays:
@@ -101,36 +103,7 @@ Visualization Manager:
       Show Names: false
       Tree:
         map:
-          odom:
-            base_link:
-              back_castor_1:
-                {}
-              camera_link:
-                camera_accel_frame:
-                  camera_accel_optical_frame:
-                    {}
-                camera_color_frame:
-                  camera_color_optical_frame:
-                    {}
-                camera_depth_frame:
-                  camera_depth_optical_frame:
-                    {}
-                camera_depth_link:
-                  {}
-                camera_gyro_frame:
-                  camera_gyro_optical_frame:
-                    {}
-              front_castor_1:
-                {}
-              imu_link:
-                {}
-              left_wheel_1:
-                {}
-              lidar_base_1:
-                lidar_1:
-                  {}
-              right_wheel_1:
-                {}
+          {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -146,8 +119,7 @@ Visualization Manager:
         Value: robot_description
       Enabled: true
       Links:
-        All Links Enabled:
-          {}
+        All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
@@ -156,10 +128,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
         camera_depth_link:
           Alpha: 1
           Show Axes: false
@@ -168,30 +142,37 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
         front_castor_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
         imu_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
         left_wheel_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
         lidar_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
         lidar_base_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
         right_wheel_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
       Name: RobotModel
       TF Prefix: ""
       Update Interval: 0
@@ -235,9 +216,9 @@ Visualization Manager:
           Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 0
+          Max Intensity: 1008
           Min Color: 0; 0; 0
-          Min Intensity: 0
+          Min Intensity: 1008
           Name: LaserScan
           Position Transformer: XYZ
           Selectable: true
@@ -249,7 +230,7 @@ Visualization Manager:
             Durability Policy: Volatile
             Filter size: 10
             History Policy: Keep Last
-            Reliability Policy: Reliable
+            Reliability Policy: Best Effort
             Value: /scan
           Use Fixed Frame: true
           Use rainbow: true
@@ -281,7 +262,6 @@ Visualization Manager:
             Map: false
             RobotModel: false
             Sensors:
-              Camera: true
               LaserScan: true
               Value: true
             TF: false
@@ -454,7 +434,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 9.880836486816406
+      Distance: 6.101155757904053
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -469,10 +449,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.3847962617874146
+      Pitch: 0.8347967863082886
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.19081449508667
+      Yaw: 3.5708181858062744
     Saved: ~
 Window Geometry:
   Camera:
